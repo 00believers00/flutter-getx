@@ -1,0 +1,5 @@
+#include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"
+#include "Generated.xcconfig"
+app_display_name=GetX TODO
+app_version_number=0.0.1
+app_build_number=1
