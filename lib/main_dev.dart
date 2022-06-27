@@ -6,7 +6,7 @@ import 'app/application.dart';
 void main(){
   FlavorConfig(
       variables: {
-        "baseUrl": "https://www.example-develop.com",
+        "baseUrl": "localhost:3000",
       }
   );
   runApp(const Application());

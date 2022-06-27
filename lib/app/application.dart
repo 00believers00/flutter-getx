@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'routes/app_pages.dart';
-import 'services/http_service.dart';
-import 'services/localization_service.dart';
+import 'data/networks/http_networks.dart';
+import 'data/services/localization_service.dart';
 
 class Application extends StatelessWidget {
   const Application({Key? key}) : super(key: key);
@@ -27,6 +27,6 @@ class RootBinding implements Bindings {
   @override
   void dependencies() {
     // Get.put(LocationService());
-    Get.put(HttpService());
+    Get.put(HttpNetworks());
   }
 }

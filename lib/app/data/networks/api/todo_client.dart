@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../models/todo_detail.dart';
+import '../../models/todo_detail.dart';
 
 part 'todo_client.g.dart';
 
-@RestApi(baseUrl: "https://jsonplaceholder.typicode.com/")
+@RestApi()
 abstract class TodoClient {
   factory TodoClient(Dio dio, {String baseUrl}) = _TodoClient;
 

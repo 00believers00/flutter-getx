@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/models/todo_detail.dart';
-import '../../../data/providers/todo_client.dart';
+import '../../../data/networks/api/todo_client.dart';
 import '../../../routes/app_pages.dart';
-import '../../../services/http_service.dart';
-import '../../../services/localization_service.dart';
+import '../../../data/networks/http_networks.dart';
+import '../../../data/services/localization_service.dart';
 
 class DashboardController extends GetxController {
   RxInt dex = 99.obs;
@@ -15,7 +15,7 @@ class DashboardController extends GetxController {
   // late RxList todoList;
   RxList<TodoDetail> todoList = <TodoDetail>[].obs;
   final TextEditingController controllerTodo = TextEditingController();
-  final httpService = Get.find<HttpService>();
+  final httpNetworks = Get.find<HttpNetworks>();
   RxString selectedLang = LocalizationService.languages.first.obs;
   @override
   void onInit() {
@@ -52,7 +52,8 @@ class DashboardController extends GetxController {
 
   Future<void> getTodoList() async {
     try {
-      final client = TodoClient(httpService.dio);
+      debugPrint("baseUrl:${httpNetworks.baseUrl}");
+      final client = TodoClient(httpNetworks.dio, baseUrl: httpNetworks.baseUrl);
       List<TodoDetail> todos = await client.getTodoList();
       todoList.value = todos;
     } catch (e) {

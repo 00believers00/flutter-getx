@@ -1,13 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_flavor/flutter_flavor.dart';
 
 
 
-class HttpService{
+class HttpNetworks{
   final Dio dio = Dio();
-
+  String baseUrl = "";
   void init(){
     dio.interceptors.add(_LogInterceptors(responseBody: false));
+    baseUrl = FlavorConfig.instance.variables["baseUrl"];
   }
 
 }
@@ -19,6 +21,7 @@ class _LogInterceptors extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     debugPrint('REQUEST[${options.method}] => PATH: ${options.path}');
+    options.headers["Authorization"] = "Bearer ";
     return super.onRequest(options, handler);
   }
   @override

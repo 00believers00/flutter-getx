@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 
 import '../../../data/models/todo_detail.dart';
-import '../../../services/localization_service.dart';
+import '../../../data/services/localization_service.dart';
 import '../controllers/dashboard_controller.dart';
 import 'widgets/todo_card.dart';
 

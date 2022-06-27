@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../../routes/app_pages.dart';
-import '../../../services/http_service.dart';
+import '../../../data/networks/http_networks.dart';
 
 
 class SplashScreenController extends GetxController {
@@ -13,8 +13,8 @@ class SplashScreenController extends GetxController {
   }
 
   void _initService(){
-    final httpService = Get.find<HttpService>();
-    httpService.init();
+    final httpNetworks = Get.find<HttpNetworks>();
+    httpNetworks.init();
   }
 
   void _delayTime(){
