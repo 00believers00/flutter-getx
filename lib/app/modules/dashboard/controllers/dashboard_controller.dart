@@ -52,10 +52,13 @@ class DashboardController extends GetxController {
 
   Future<void> getTodoList() async {
     try {
-      debugPrint("baseUrl:${httpNetworks.baseUrl}");
-      final client = TodoClient(httpNetworks.dio, baseUrl: httpNetworks.baseUrl);
-      List<TodoDetail> todos = await client.getTodoList();
-      todoList.value = todos;
+      // debugPrint("baseUrl:${httpNetworks.baseUrl}");
+      // final client = TodoClient(httpNetworks.dio, baseUrl: httpNetworks.baseUrl);
+      // List<TodoDetail> todos = await client.getTodoList();
+      // todoList.value = todos;
+      final result = await httpNetworks.dio.get("${httpNetworks.baseUrl}/user-info");
+
+      //debugPrint("getTodoList:$result");
     } catch (e) {
       debugPrint("ERROR getTodoList:$e");
     }
