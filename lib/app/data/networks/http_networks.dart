@@ -9,8 +9,8 @@ class HttpNetworks{
   final Dio dio = Dio();
   String baseUrl = "";
   void init(){
-    dio.interceptors.add(_LogInterceptors(responseBody: true));
-    baseUrl = FlavorConfig.instance.variables["baseUrl"];
+    dio.interceptors.add(_LogInterceptors(responseBody: false));
+
   }
 
 }
@@ -35,14 +35,29 @@ class _LogInterceptors extends Interceptor {
   }
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
-    debugPrint('ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
+    debugPrint('ERROR[${err.type}] => PATH: ${err.requestOptions.path}');
 
-    debugPrint('ERROR DATA[${err.response?.data}] => PATH: ${err.requestOptions.path}');
-    if(err.response != null){
-      GetX.Get.defaultDialog(title: "ERROR ${err.response?.statusCode}", content: Text(err.response!.data["message"]));
-      return;
-    }else{
-      return super.onError(err, handler);
+    switch(err.type){
+      case DioErrorType.response:
+        debugPrint('ERROR CODE[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
+        GetX.Get.defaultDialog(title: "ERROR ${err.response?.statusCode}", content: Text(err.response!.data["message"]));
+        break;
+      case DioErrorType.connectTimeout:
+        // TODO: Handle this case.
+        break;
+      case DioErrorType.sendTimeout:
+        // TODO: Handle this case.
+        break;
+      case DioErrorType.receiveTimeout:
+        // TODO: Handle this case.
+        break;
+      case DioErrorType.cancel:
+        // TODO: Handle this case.
+        break;
+      case DioErrorType.other:
+        // TODO: Handle this case.
+        break;
     }
+    return ;
   }
 }

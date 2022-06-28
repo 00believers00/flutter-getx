@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 
 import '../../../data/models/todo_detail.dart';
-import '../../../data/services/localization_service.dart';
+import '../../../data/services/localization_service/localization_service.dart';
 import '../controllers/dashboard_controller.dart';
 import 'widgets/todo_card.dart';
 
@@ -13,7 +13,6 @@ class DashboardView extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
-    final baseUrl = FlavorConfig.instance.variables["baseUrl"];
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -37,7 +36,6 @@ class DashboardView extends GetView<DashboardController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(baseUrl, style: const TextStyle(color: Colors.black),),
             Text(
               "dashboard.title".tr,
               style: Theme.of(context).textTheme.headline4,

@@ -13,8 +13,8 @@ class SplashScreenController extends GetxController {
   }
 
   void _initService(){
-    final httpNetworks = Get.find<HttpNetworks>();
-    httpNetworks.init();
+    // final httpNetworks = Get.find<HttpNetworks>();
+    // httpNetworks.init();
   }
 
   void _delayTime(){

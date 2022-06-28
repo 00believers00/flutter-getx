@@ -2,10 +2,10 @@ import 'dart:ui';
 
 import 'package:get/get.dart';
 
-import '../../constants/lang/en_us.dart';
-import '../../constants/lang/ja_jp.dart';
-import '../../constants/lang/th_th.dart';
-import '../../constants/lang/tr_tr.dart';
+import '../../../constants/lang/en_us.dart';
+import '../../../constants/lang/ja_jp.dart';
+import '../../../constants/lang/th_th.dart';
+import '../../../constants/lang/tr_tr.dart';
 
 
 

@@ -2,12 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_todo/app/data/services/todo_api_service/todos_api_service.dart';
 
 import '../../../data/models/todo_detail.dart';
-import '../../../data/networks/api/todo_client.dart';
+import '../../../data/networks/exceptions/api_exceptions.dart';
+import '../../../data/services/localization_service/localization_service.dart';
 import '../../../routes/app_pages.dart';
 import '../../../data/networks/http_networks.dart';
-import '../../../data/services/localization_service.dart';
 
 class DashboardController extends GetxController {
   RxInt dex = 99.obs;
@@ -15,7 +16,7 @@ class DashboardController extends GetxController {
   // late RxList todoList;
   RxList<TodoDetail> todoList = <TodoDetail>[].obs;
   final TextEditingController controllerTodo = TextEditingController();
-  final httpNetworks = Get.find<HttpNetworks>();
+  // final httpNetworks = Get.find<HttpNetworks>();
   RxString selectedLang = LocalizationService.languages.first.obs;
   @override
   void onInit() {
@@ -51,16 +52,17 @@ class DashboardController extends GetxController {
   }
 
   Future<void> getTodoList() async {
-    try {
-      // debugPrint("baseUrl:${httpNetworks.baseUrl}");
-      // final client = TodoClient(httpNetworks.dio, baseUrl: httpNetworks.baseUrl);
-      // List<TodoDetail> todos = await client.getTodoList();
-      // todoList.value = todos;
-      final result = await httpNetworks.dio.get("${httpNetworks.baseUrl}/user-info");
 
-      //debugPrint("getTodoList:$result");
-    } catch (e) {
-      debugPrint("ERROR getTodoList:$e");
+    try {
+      final result = await Get.find<TodosApiService>().getTopic();
+      debugPrint("getTodoList:$result");
+    } on ApiException {
+      Get.defaultDialog(
+        title:
+        'We apologize, your order could not be placed at this time.\nPlease try again.',
+        onConfirm: Get.back,
+      );
+      return;
     }
   }
 }
